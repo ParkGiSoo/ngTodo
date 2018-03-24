@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UserService} from '../user.service';
 import {TodoVO} from '../domain/todo.vo';
 import {animate, style, transition, trigger} from "@angular/animations";
+import {MatSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-angular',
@@ -22,7 +23,7 @@ export class AngularComponent implements OnInit {
   //기존값을 저장할 Map 객체 정의
   tempTodoList: Map<number, TodoVO>;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private snackBer: MatSnackBar) {
     this.tempTodoList = new Map<number, TodoVO>();
   }
 
@@ -66,5 +67,18 @@ export class AngularComponent implements OnInit {
         Object.assign(todo, body);
         todo.isEdited = false;
       });
+  }
+
+  removeTodo(todo_id: number, index: number) {
+    const result = confirm('삭제하시겠습니까?');
+    if (result) {
+      this.userService.removeTodo(todo_id).subscribe(body =>{
+        if (body.result === 0) {
+          this.snackBer.open("삭제되었습니다.",null,{duration: 2000});
+          // 모델 데이터 동기화
+          this.todoList.splice(index, 1);
+        }
+      })
+    }
   }
 }
