@@ -24,4 +24,8 @@ export class UserService {
   addTodo(todo: TodoVO): Observable<TodoVO> {
     return this.http.post<TodoVO>(this.SERVER + '/api/todo', todo, {headers: this.headers});
   }
+
+  modifyTodo(todo: TodoVO): Observable<TodoVO> {
+    return this.http.put<TodoVO>(this.SERVER + '/api/todo', todo, {headers: this.headers});
+  }
 }

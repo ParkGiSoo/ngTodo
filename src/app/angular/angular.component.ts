@@ -44,15 +44,27 @@ export class AngularComponent implements OnInit {
   }
 
   save(todo: TodoVO) {
-    todo.isEdited = !todo.isEdited;
     //기존값 저장: todo 객체를 deep copy
     const tempTodo = Object.assign({},todo);
     this.tempTodoList.set(todo.todo_id,tempTodo);
+
+    todo.isEdited = true;
   }
   restore(todo: TodoVO) {
-    todo.isEdited = !todo.isEdited;
     //기존값 복원
     const tempTodo = this.tempTodoList.get(todo.todo_id);
     Object.assign(todo, tempTodo);
+
+    todo.isEdited = false;
+  }
+
+  modifyTodo(todo: TodoVO) {
+    //todo 객체는 created,updated, isEdited가 모두 넘어간다.
+    //그러므로 isFinished, todo, todo_id만 넘기는게 바람직하다.
+    this.userService.modifyTodo(todo)
+      .subscribe(body => {
+        Object.assign(todo, body);
+        todo.isEdited = false;
+      });
   }
 }
