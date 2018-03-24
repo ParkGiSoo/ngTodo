@@ -7,11 +7,11 @@ import {animate, style, transition, trigger} from "@angular/animations";
   selector: 'app-angular',
   templateUrl: './angular.component.html',
   styleUrls: ['./angular.component.scss'],
-  animations:[
+  animations: [
     trigger('flyInOut',[
       transition('void => in',[
-        style({opacity:0,transform:'translate(-100%,0)'}),
-        animate(300,style({opacity:1,transform:'translate(0,0)'}))
+        style({opacity: 0, transform: 'translate(-100%,0)'}),
+        animate(300,style({opacity: 1, transform: 'translate(0,0)'}))
       ])
     ])
   ]
