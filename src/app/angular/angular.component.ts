@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../user.service';
 import {TodoVO} from '../domain/todo.vo';
-import {animate, style, transition, trigger} from "@angular/animations";
+import {animate, keyframes, state, style, transition, trigger} from "@angular/animations";
 import {MatSnackBar} from "@angular/material";
 
 @Component({
@@ -10,9 +10,18 @@ import {MatSnackBar} from "@angular/material";
   styleUrls: ['./angular.component.scss'],
   animations: [
     trigger('flyInOut',[
+      state('in', style({opacity: 1, transform: 'translate(0,0)'})),
       transition('void => in',[
         style({opacity: 0, transform: 'translate(-100%,0)'}),
-        animate(300,style({opacity: 1, transform: 'translate(0,0)'}))
+        animate(300)
+      ]),
+      transition('in => void',[
+        // style({opacity: 1, transform: 'translate(0,0)'}),
+        animate(300, keyframes([
+          style({opacity: 1, transform: 'translate(0,0)', offset: 0}),
+          style({opacity: 1, transform: 'translate(-50px,0)', offset: 0.7}),
+          style({opacity: 0, transform: 'translate(100%,0) scale(2.0)', offset: 1.0}),
+        ]))
       ])
     ])
   ]
@@ -78,7 +87,7 @@ export class AngularComponent implements OnInit {
           // 모델 데이터 동기화
           this.todoList.splice(index, 1);
         }
-      })
+      });
     }
   }
 }
