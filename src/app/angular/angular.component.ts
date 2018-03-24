@@ -4,6 +4,9 @@ import {TodoVO} from '../domain/todo.vo';
 import {animate, keyframes, state, style, transition, trigger} from "@angular/animations";
 import {MatSnackBar} from "@angular/material";
 
+import * as $ from 'jquery';
+// declare var $: any;
+
 @Component({
   selector: 'app-angular',
   templateUrl: './angular.component.html',
@@ -89,5 +92,9 @@ export class AngularComponent implements OnInit {
         }
       });
     }
+  }
+
+  slide() {
+    $('.tbody').slideToggle();
   }
 }

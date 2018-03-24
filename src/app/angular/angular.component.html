@@ -17,7 +17,7 @@
     </form>
 
     <div class="table mt-2">
-      <div class="tr">
+      <div class="tr" (click)="slide()">
         <div class="th">완료</div>
         <div class="th">todo</div>
         <div class="th">생성일</div>
@@ -25,11 +25,11 @@
         <div class="th">삭제</div>
       </div>
       <ng-template ngFor let-todo [ngForOf]="todoList" let-idx="index">
-        <div class="tr" [@flyInOut]="'in'" *ngIf="!todo.isEdited" appHighlight [highlightColor]="'#8ae058'">
+        <div class="tbody tr" [@flyInOut]="'in'" *ngIf="!todo.isEdited" appHighlight [highlightColor]="'#8ae058'">
           <div class="td">{{todo.isFinished ? '완료' : '미완료'}}</div>
           <div class="td">{{todo.todo}}</div>
-          <div class="td">{{todo.created}}</div>
-          <div class="td">{{todo.updated}}</div>
+          <div class="td">{{todo.created | mydate: 'aaaa'}}</div>
+          <div class="td">{{todo.updated | date: 'yyyy-MM-dd aa HH:mm'}}</div>
           <div class="td">
             <button mat-raised-button color="accent" (click)="save(todo)">수정</button>
             <button mat-raised-button color="warn" (click)="removeTodo(todo.todo_id, idx)">삭제</button>
