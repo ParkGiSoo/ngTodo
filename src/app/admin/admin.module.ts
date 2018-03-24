@@ -4,6 +4,9 @@ import { AdminComponent } from './admin/admin.component';
 import { HomeComponent } from './home/home.component';
 import { NewsComponent } from './news/news.component';
 import {RouterModule, Routes} from '@angular/router';
+import {MatCardModule, MatExpansionModule, MatToolbarModule} from "@angular/material";
+import {FlexLayoutModule} from "@angular/flex-layout";
+import {AdminService} from "./admin.service";
 
 const routes: Routes = [
   {path: '', component: AdminComponent, children: [
@@ -16,7 +19,12 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    FlexLayoutModule,
+    MatToolbarModule,
+    MatExpansionModule,
+    MatCardModule,
   ],
-  declarations: [AdminComponent, HomeComponent, NewsComponent]
+  declarations: [AdminComponent, HomeComponent, NewsComponent],
+  providers: [AdminService]
 })
 export class AdminModule { }
