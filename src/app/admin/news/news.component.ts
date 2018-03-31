@@ -17,6 +17,10 @@ export class NewsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.findNews();
+  }
+
+  findNews() {
     const page = {
       start_index: this.page.pageSize * this.page.pageIndex,  // 페이지사이즈 * (현재페이지-1)
       page_size: this.page.pageSize
@@ -28,6 +32,13 @@ export class NewsComponent implements OnInit {
         // total 값 저장
         this.page.totalCount = body.total;
       });
+  }
+
+  pageChanged(event: any){
+    // console.log(event, typeof event);
+    this.page.pageIndex = event.pageIndex;
+    this.page.pageSize = event.pageSize;
+    this.findNews();
   }
 
 }
