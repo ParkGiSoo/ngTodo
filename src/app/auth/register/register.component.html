@@ -1,3 +1,40 @@
-<p>
-  register works!
-</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      ng2spring 카페 회원가입
+    </mat-card-title>
+  </mat-card-header>
+
+  <form [formGroup]="form" (ngSubmit)="register()" novalidate>
+    <mat-card-content fxLayout="column">
+      <mat-form-field>
+        <input matInput formControlName="nickname" placeholder="닉네임">
+        <mat-error *ngIf="form.controls['nickname'].hasError('required') && form.controls['nickname'].touched">닉네임을 입력하세요</mat-error>
+        <mat-error *ngIf="form.controls['nickname'].hasError('minlength') && form.controls['nickname'].touched">4자이상 12자이하 입력하세요</mat-error>
+      </mat-form-field>
+      <mat-checkbox class="mt-1" formControlName="isTerm">
+        이용약관동의
+      </mat-checkbox>
+      <div class="term-box">
+        <div>
+          <p>제1조 총칙
+          </p>
+          <p>
+            여기는 이용약관 동의가 들어갑니다.
+        </div>
+      </div>
+      <mat-checkbox formControlName="isInfo">개인정보이용동의</mat-checkbox>
+      <div class="term-box">
+        <div>
+          <p>
+            제 1 장 총 칙
+          </p>　
+          <p>
+            여기는 개인정보이용동의가 들어갑니다.
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start start">
+        <mat-form-field>
+          <input matInput placeholder="우편번호" formControlName="postcode" readonly class="postcodify_postcode5">
+        </mat-form-field>
+
