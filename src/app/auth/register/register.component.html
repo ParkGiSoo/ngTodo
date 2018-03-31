@@ -9,8 +9,10 @@
     <mat-card-content fxLayout="column">
       <mat-form-field>
         <input matInput formControlName="nickname" placeholder="닉네임">
-        <mat-error *ngIf="form.controls['nickname'].hasError('required') && form.controls['nickname'].touched">닉네임을 입력하세요</mat-error>
-        <mat-error *ngIf="form.controls['nickname'].hasError('minlength') && form.controls['nickname'].touched">4자이상 12자이하 입력하세요</mat-error>
+        <mat-error *ngIf="form.controls['nickname'].hasError('required')
+          && form.controls['nickname'].touched">닉네임을 입력하세요</mat-error>
+        <mat-error *ngIf="form.controls['nickname'].hasError('minlength')
+        && form.controls['nickname'].touched">4자이상 12자이하 입력하세요</mat-error>
       </mat-form-field>
       <mat-checkbox class="mt-1" formControlName="isTerm">
         이용약관동의
@@ -38,3 +40,23 @@
           <input matInput placeholder="우편번호" formControlName="postcode" readonly class="postcodify_postcode5">
         </mat-form-field>
 
+        <button mat-raised-button type="button" id="postcode">우편번호</button>
+      </div>
+      <mat-form-field>
+        <input matInput placeholder="주소" formControlName="address" readonly class="postcodify_address">
+      </mat-form-field>
+      <mat-form-field class="mb-1">
+        <input matInput placeholder="생일" formControlName="birthday" [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <button type="submit" mat-raised-button color="primary">
+        가 입
+      </button>
+    </mat-card-content>
+  </form>
+</mat-card>
+
+<p>Form value: {{ form.value | json }}</p>
+<p>Form status: {{ form.status | json }}</p>
