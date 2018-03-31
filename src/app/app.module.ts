@@ -35,7 +35,7 @@ const routes: Routes = [
       {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterComponent},
       {path: 'nickname', component: NicknameComponent, canActivate: [AuthGuardService]},
-      {path: 'chat', component: ChatComponent}
+      {path: 'chat', component: ChatComponent, canActivate: [AuthGuardService]}
     ]},
   // 참고: 향후 관리자 생성 모듈
   { path: 'admin', loadChildren: 'app/admin/admin.module#AdminModule', canLoad: [AuthGuardService]}
