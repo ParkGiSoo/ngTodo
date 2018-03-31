@@ -37,6 +37,7 @@ export class NicknameComponent implements OnInit {
     this.userService.modifyMember(this.form.value)
       .subscribe(resp => {
         if (resp.body.result === 0) {
+          localStorage.setItem('token', resp.headers.get('refresh_token'));
           this.snackBar.open("수정되었습니다.", null, {duration: 2000});
         }
       });
