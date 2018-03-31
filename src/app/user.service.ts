@@ -52,7 +52,8 @@ export class UserService {
       'Content-Type': 'application/json',
       'Authorization': localStorage.getItem('token')
     });
-    return this.http.get<MemberVO>(this.SERVER + '/member/api/member?member_id=' + member_id, {headers: header, observe: 'response'});
+    return this.http.get<MemberVO>(this.SERVER + '/member/api/member?member_id=' + member_id,
+      {headers: header, observe: 'response'});
   }
 
   modifyMember(member: MemberVO): Observable<HttpResponse<ResultVO>> {
