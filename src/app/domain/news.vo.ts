@@ -1,6 +1,6 @@
-export class NewsVo {
+export class NewsVO {
   news_id: number;
-  title :string;
+  title: string;
   content: string;
   created: string;
   updated: string;

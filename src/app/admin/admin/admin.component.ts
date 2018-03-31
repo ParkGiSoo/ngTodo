@@ -6,9 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-  //상단 툴바와 좌측 사이드 메뉴를 담당
+  // 상단 툴바와 좌측 사이드 메뉴를 담당
 
   selected: string;
+
   constructor() { }
 
   ngOnInit() {
