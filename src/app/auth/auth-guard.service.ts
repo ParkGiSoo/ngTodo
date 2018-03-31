@@ -76,4 +76,14 @@ export class AuthGuardService implements CanLoad, CanActivate, CanActivateChild 
     this.redirectUrl = null;
     this.router.navigateByUrl('/');
   }
+
+  getMemberId(): number {
+    let token = localStorage.getItem('token');
+    if (token && !this.jwtHelper.isTokenExpired(token)) {
+      // console.log(this.jwtHelper.decodeToken(token));
+      return +(this.jwtHelper.decodeToken(token).jti);
+    } else {
+      return 0;
+    }
+  }
 }
