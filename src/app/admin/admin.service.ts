@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {ResultVO} from '../domain/result.vo';
 import {Observable} from 'rxjs/Observable';
+import {NewsVO} from '../domain/news.vo';
 
 @Injectable()
 export class AdminService {
@@ -19,5 +20,9 @@ export class AdminService {
 
   findNews(page: any): Observable<ResultVO> {
     return this.http.post<ResultVO>(this.SERVER + '/api/newsList', page, {headers: this.headers});
+  }
+
+  findOneNews(news_id: number): Observable<NewsVO> {
+    return this.http.get<NewsVO>(this.SERVER + `/api/news?news_id=${news_id}`);
   }
 }
