@@ -4,6 +4,7 @@ import {environment} from '../environments/environment';
 import {TodoVO} from './domain/todo.vo';
 import {Observable} from 'rxjs/Observable';
 import {ResultVO} from './domain/result.vo';
+import {MemberVO} from './domain/member.vo';
 
 @Injectable()
 export class UserService {
@@ -37,5 +38,10 @@ export class UserService {
   // social login  -----------------------------------------------------------------------------------------------------
   getSocial(site: string) {
     return this.http.get(this.SERVER + '/api/social?site=' + site);
+  }
+
+  // login & signUp
+  signUp(params: MemberVO): Observable<ResultVO> {
+    return this.http.post<ResultVO>(this.SERVER + '/api/signUp', JSON.stringify(params), {headers: this.headers});
   }
 }

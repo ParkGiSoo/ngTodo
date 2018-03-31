@@ -55,8 +55,46 @@ export class RegisterComponent implements OnInit {
         });
       }, 2000);
     });
-
   }
 
+  register() {
+    // jquery로 가져온값을 세팅
+    this.form.controls['postcode'].setValue($('.postcodify_postcode5').val());
+    this.form.controls['address'].setValue($('.postcodify_address').val());
 
+    if (!this.form.controls['isTerm'].value) {
+      this.snackBar.open('이용약관에 동의하세요.', null, {duration: 2000});
+      return;
+    }
+
+    if (!this.form.controls['isInfo'].value) {
+      this.snackBar.open('개인정보이용에 동의하세요.', null, {duration: 2000});
+      return;
+    }
+
+    if (!this.form.valid) {
+      this.snackBar.open('필수입력 사항을 확인하세요.', null, {duration: 2000});
+      return;
+    }
+
+    this.member.nickname = this.form.controls['nickname'].value;
+
+    this.userService.signUp(this.member)
+      .subscribe(body => {
+        if (body.result === 0) {
+          localStorage.setItem('token', body.data['token']);
+
+          // 페이지 리프레쉬
+          if (this.authGuard.redirectUrl) {
+            this.router.navigateByUrl(this.authGuard.redirectUrl);
+          } else {
+            this.router.navigateByUrl('/');
+          }
+        } else if (body.result === 100) {
+          this.snackBar.open('닉네임이 중복입니다.', null, {duration: 2000});
+        } else {
+          this.snackBar.open('회원가입에 실패하였습니다.', null, {duration: 2000});
+        }
+      });
+  }
 }
